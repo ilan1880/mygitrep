@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t natr/nwrep:v1.0 .
+script:
+  - echo "$password" | docker login -u "$username" --password-stdin
+  - docker images
+  - docker push natr/nwrep:v1.0
+notifications:
+  email:
+    recipients:
+      - ilan.natraj@gmail.com
+    on_success: always
+    on_failure: always
